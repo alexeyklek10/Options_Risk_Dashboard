@@ -14,13 +14,17 @@ Research and educational tool, not investment advice. The author is the sole mai
 
 ## Sample output
 
-`images/dashboard_hero.png` is the headline KPI strip plus three at-a-glance panels (skew term structure, per-strike gamma exposure, put-call ratio per expiry) generated from a SPY-like snapshot.
-
-`images/iv_surface_spy.png` is the call-side implied-volatility surface across the listed strike and DTE grid, interpolated with `scipy.interpolate.griddata` cubic and filled with nearest-neighbor outside the convex hull.
-
-`images/gex_spy.png` is the per-strike gamma exposure under the SqueezeMetrics dealer-sign convention. Negative cluster left of spot is the protective-put OI; positive cluster right of spot is the covered-call / upside-speculation OI. The gamma-flip strike is the crossover from net-negative to net-positive cumulative GEX walking down from the highest strike.
+The headline KPI strip plus three at-a-glance panels: skew term structure, per-strike gamma exposure, put-call ratio per expiry.
 
 ![Dashboard hero](images/dashboard_hero.png)
+
+Call-side implied-volatility surface across the listed strike and DTE grid, interpolated with `scipy.interpolate.griddata` cubic and filled with nearest-neighbor outside the convex hull.
+
+![IV surface](images/iv_surface_spy.png)
+
+Per-strike gamma exposure under the SqueezeMetrics dealer-sign convention. Negative cluster left of spot is the protective-put OI; positive cluster right of spot is the covered-call / upside-speculation OI. The gamma-flip strike is the crossover from net-negative to net-positive cumulative GEX walking down from the highest strike.
+
+![GEX](images/gex_spy.png)
 
 ## Features
 
