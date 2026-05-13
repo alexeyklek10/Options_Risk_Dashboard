@@ -1,0 +1,24 @@
+# Streamlit configuration for the Options Risk Dashboard.
+# Dark theme tuned for chart-heavy layouts; secrets live in .streamlit/secrets.toml
+# (gitignored).
+
+[theme]
+base = "dark"
+primaryColor = "#5BA3F5"
+backgroundColor = "#0E1117"
+secondaryBackgroundColor = "#1A1F2B"
+textColor = "#E6E9EF"
+font = "sans serif"
+
+[server]
+headless = true
+runOnSave = false
+enableCORS = false
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false
+
+[client]
+showErrorDetails = true
+toolbarMode = "minimal"

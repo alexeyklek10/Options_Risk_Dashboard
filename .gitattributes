@@ -1,0 +1,18 @@
+# Strip Jupyter notebook outputs from diffs and on commit.
+# Set up by running `pre-commit install` and ensuring nbstripout is configured.
+*.ipynb filter=nbstripout
+*.ipynb diff=ipynb
+
+# Normalize line endings: LF in repo, native on checkout for shell scripts.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary
+*.parquet binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

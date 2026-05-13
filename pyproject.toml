@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ord"
+version = "0.1.0"
+description = "Options Risk Dashboard: multi-source options chain analytics with hand-rolled Black-Scholes pricing, Greeks, and risk metrics."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Alexey Klekovkin" }]
+keywords = ["options", "black-scholes", "greeks", "implied-volatility", "gamma-exposure", "quant"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+
+[project.urls]
+Homepage = "https://github.com/alexeyklek10/Options_Risk_Dashboard"
+Repository = "https://github.com/alexeyklek10/Options_Risk_Dashboard"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["notebooks", "data", "images"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "RUF"]
+# Allow non-imperative module docstrings; allow ambiguous unicode chars in math.
+ignore = ["D205", "RUF001"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]  # allow assert False in tests if useful
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+extend-exclude = '''
+/(
+    notebooks
+  | data
+  | images
+)/
+'''
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+files = ["src"]
+show_error_codes = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = [
+    "yfinance",
+    "yfinance.*",
+    "py_vollib",
+    "py_vollib.*",
+    "py_lets_be_rational",
+    "py_lets_be_rational.*",
+    "scipy",
+    "scipy.*",
+    "plotly",
+    "plotly.*",
+    "pyarrow",
+    "pyarrow.*",
+    "streamlit",
+    "streamlit.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src/ord --cov-report=term-missing --cov-report=xml --strict-markers"
+markers = [
+    "slow: marks tests as slow (deselect with -m 'not slow')",
+    "integration: marks tests that hit a real external API",
+]
