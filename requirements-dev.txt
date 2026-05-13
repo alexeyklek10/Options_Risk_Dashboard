@@ -10,4 +10,6 @@ pre-commit>=3.7
 nbstripout>=0.7
 jupyter>=1
 ipykernel
+matplotlib>=3.8,<4  # notebook charts only; never imported from src/
+nbformat>=5.10
 types-requests

@@ -3,6 +3,10 @@
 *.ipynb filter=nbstripout
 *.ipynb diff=ipynb
 
+# The methodology notebook is the published artifact; keep its outputs so
+# GitHub renders charts and tables.
+notebooks/methodology.ipynb -filter -diff
+
 # Normalize line endings: LF in repo, native on checkout for shell scripts.
 * text=auto eol=lf
 *.bat text eol=crlf

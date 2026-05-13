@@ -30,7 +30,7 @@ where = ["src"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
-extend-exclude = ["notebooks", "data", "images"]
+extend-exclude = ["notebooks", "data", "images", ".build_notebook.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "B", "SIM", "RUF"]
@@ -52,11 +52,10 @@ ignore = ["D205", "RUF001"]
 line-length = 100
 target-version = ["py311"]
 extend-exclude = '''
-/(
-    notebooks
-  | data
-  | images
-)/
+(
+    /(notebooks|data|images)/
+  | /\.build_notebook\.py$
+)
 '''
 
 [tool.mypy]

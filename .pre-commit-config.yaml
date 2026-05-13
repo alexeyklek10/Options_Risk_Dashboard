@@ -35,3 +35,6 @@ repos:
     rev: 0.7.1
     hooks:
       - id: nbstripout
+        # methodology.ipynb is the published artifact; we want its committed
+        # outputs (charts, tables) to render on GitHub and in Colab.
+        exclude: ^notebooks/methodology\.ipynb$
