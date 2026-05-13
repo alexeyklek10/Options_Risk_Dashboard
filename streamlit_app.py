@@ -13,17 +13,28 @@ auto-enable when ``TRADIER_TOKEN`` / ``POLYGON_API_KEY`` env vars are set
 from __future__ import annotations
 
 import logging
+import sys
+from pathlib import Path
 
-import pandas as pd
-import streamlit as st
+# Streamlit Community Cloud does not install the local package by default
+# (no `setup.py` step in its build), so we make `from ord.*` resolve by
+# inserting the src layout onto sys.path before any project imports. Harmless
+# locally (the editable install already covers it) and inside the Docker image
+# (where PYTHONPATH=/app/src is set explicitly).
+_SRC = Path(__file__).resolve().parent / "src"
+if _SRC.is_dir() and str(_SRC) not in sys.path:
+    sys.path.insert(0, str(_SRC))
 
-from ord.data.aggregator import ChainAggregator
-from ord.data.base import DataProvider, ProviderUnavailableError
-from ord.data.polygon_provider import PolygonProvider
-from ord.data.tradier_provider import TradierProvider
-from ord.data.yfinance_provider import YFinanceProvider
-from ord.ui.context import AppContext
-from ord.ui.tabs import (
+import pandas as pd  # noqa: E402
+import streamlit as st  # noqa: E402
+
+from ord.data.aggregator import ChainAggregator  # noqa: E402
+from ord.data.base import DataProvider, ProviderUnavailableError  # noqa: E402
+from ord.data.polygon_provider import PolygonProvider  # noqa: E402
+from ord.data.tradier_provider import TradierProvider  # noqa: E402
+from ord.data.yfinance_provider import YFinanceProvider  # noqa: E402
+from ord.ui.context import AppContext  # noqa: E402
+from ord.ui.tabs import (  # noqa: E402
     data_quality,
     implied_pdf,
     iv_vs_rv,
@@ -32,11 +43,11 @@ from ord.ui.tabs import (
     skew_and_pcr,
     strategy_builder,
 )
-from ord.ui.tabs import gex as gex_tab
-from ord.ui.tabs import greeks as greeks_tab
-from ord.ui.tabs import iv_surface as iv_tab
-from ord.ui.tabs import overview as overview_tab
-from ord.utils.rates import get_risk_free_rate
+from ord.ui.tabs import gex as gex_tab  # noqa: E402
+from ord.ui.tabs import greeks as greeks_tab  # noqa: E402
+from ord.ui.tabs import iv_surface as iv_tab  # noqa: E402
+from ord.ui.tabs import overview as overview_tab  # noqa: E402
+from ord.utils.rates import get_risk_free_rate  # noqa: E402
 
 logging.basicConfig(level=logging.INFO)
 

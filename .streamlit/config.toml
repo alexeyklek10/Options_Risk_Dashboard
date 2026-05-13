@@ -13,7 +13,6 @@ font = "sans serif"
 [server]
 headless = true
 runOnSave = false
-enableCORS = false
 enableXsrfProtection = true
 
 [browser]
