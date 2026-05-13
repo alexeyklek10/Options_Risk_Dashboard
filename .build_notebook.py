@@ -318,11 +318,14 @@ md(
     "## 5. Worked example: SPY chain\n"
     "\n"
     "Load the dated SPY chain fixture, recompute every IV from the mid via our "
-    "solver, and build the volatility surface. The fixture is a real chain pulled "
-    "via `yfinance` on the date stamped in the filename; using a checked-in fixture "
-    "(rather than re-pulling on every run) makes the notebook deterministic and "
-    "keeps the README screenshots reproducible. Cell at the end shows the one-line "
-    "swap to re-run against today's live chain."
+    "solver, and build the volatility surface. The fixture is a SPY-like chain "
+    "priced from first principles via Black-Scholes-Merton (see `.build_fixture.py` "
+    "for the generator). It's structured to exercise every analytic with plausible "
+    "numbers (downward-skewed smile, OI peaking at ATM with monthly cycles, "
+    "asymmetric call/put OI mirroring SPY's typical positioning). The published "
+    "README screenshots are generated from this same fixture so they never rot. "
+    "The final cell of this notebook shows the one-line swap to re-run the same "
+    "code path against today's live yfinance chain."
 )
 
 code(
