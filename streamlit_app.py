@@ -18,7 +18,9 @@ import pandas as pd
 import streamlit as st
 
 from ord.data.aggregator import ChainAggregator
-from ord.data.base import DataProvider
+from ord.data.base import DataProvider, ProviderUnavailableError
+from ord.data.polygon_provider import PolygonProvider
+from ord.data.tradier_provider import TradierProvider
 from ord.data.yfinance_provider import YFinanceProvider
 from ord.ui.context import AppContext
 from ord.ui.tabs import (
@@ -40,10 +42,20 @@ logging.basicConfig(level=logging.INFO)
 
 
 def _enabled_providers() -> list[DataProvider]:
-    # yfinance is always available. Tradier / Polygon wiring lands in step 7;
-    # this list is the single source of truth for "what providers does the
-    # aggregator know about right now".
-    return [YFinanceProvider()]
+    """Build the active provider list.
+
+    yfinance is always available. Tradier and Polygon auto-enable when their
+    respective env vars (``TRADIER_TOKEN``, ``POLYGON_API_KEY``) are set;
+    otherwise they raise :class:`ProviderUnavailableError` on construction
+    and are silently skipped.
+    """
+    providers: list[DataProvider] = [YFinanceProvider()]
+    for cls in (TradierProvider, PolygonProvider):
+        try:
+            providers.append(cls())
+        except ProviderUnavailableError:
+            continue
+    return providers
 
 
 @st.cache_data(ttl=900, show_spinner="Fetching options chain...")
