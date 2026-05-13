@@ -8,7 +8,7 @@ Research and educational tool, not investment advice. The author is the sole mai
 
 ## Live demo
 
-[Live demo](DEPLOY_URL_PLACEHOLDER) on Streamlit Community Cloud.
+[Live demo](https://optionsriskdashboard-habdkbmbe7f7gckmsqunii.streamlit.app/) on Streamlit Community Cloud.
 
 [![Open methodology in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/alexeyklek10/Options_Risk_Dashboard/blob/main/notebooks/methodology.ipynb)
 
